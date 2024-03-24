@@ -3,17 +3,23 @@
 0=${(%):-%x}
 
 case $1 in
-    help | list)
+    help | list | purge)
         _zman_$1
         ;;
 
     load)
+        _zman_load ${@:2}
         ;;
 
     update)
+        if (( ${#@} == 1 )); then
+            _zman_update_self
+        else
+            _zman_update_plugin ${@:2}
+        fi
         ;;
-
     *)
-        _zman_print "Unknown action \"$1\""
+        _zman_print "Unknown subcommand \"$1\""
         ;;
 esac
+

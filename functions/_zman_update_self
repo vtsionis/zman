@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+0=${(%):-%x}
+
+# Note that we need to exclude the nested "functions" directory
+local source_dir=${0:A:h:h}
+
+if [[ -d $source_dir/.git ]]; then
+    _zman_print "%F{#5bc0eb}󰚰%f Updating Zman..."
+    git -C $source_dir pull --quiet
+
+    if (( $? == 0 )); then
+        _zman_print "%F{#50fa7b}✓%f Update of Zman completed"
+    else
+        _zman_print "%F{#ff5555}%f Failed to update Zman"
+    fi
+else
+    _zman_print "%F{#ff5555}%f Failed to update Zman due to missing git repository"
+fi
+
