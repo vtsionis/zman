@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+
+# TODO: Extend functionality to handle more complex arguments
+
+local name=${${(@s[/])1}[2]}
+
+# Replace "/" with "SLASH" in the plugin's name when storing its repository
+local source_dir=$ZMAN_PLUGINS/${1//\//SLASH}
+
+local _is_installed=0
+if [[ ! -d $source_dir ]]; then
+    _zman_print "%F{#bd93f9}%f Installing plugin \"$1\"..."
+    git clone https://github.com/$1 $source_dir --quiet
+
+    _is_installed=$?
+    if (( $_is_installed == 0 )); then
+        _zman_print "%F{#50fa7b}✓%f Installation of \"$1\" completed"
+    else
+        _zman_print "%F{#ff5555}%f Failed to install plugin \"$1\""
+    fi
+fi
+
+if (( ${zsh_loaded_plugins[(Ie)$1]} == 0 )); then
+    # Only load the plugin if it wasn't loaded already
+    (( $_is_installed == 0 )) && source $source_dir/$name.plugin.zsh
+else
+    _zman_print "Plugin $1 is already loaded"
+fi
+
+zsh_loaded_plugins+="$1"
+
