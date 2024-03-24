@@ -16,7 +16,7 @@ Add below lines to your `.zshrc` file, or any other configuration file that is s
 # .zshrc
 
 # Bootstrap Zman as the plugin manager
-export ZMAN_DIR="/Path/to/zman"
+export ZMAN_DIR="/path/to/zman"
 
 if [[ ! -f $ZMAN_DIR/zman.zsh ]]; then
   git clone https://github.com/vtsionis/zman.git $ZMAN_DIR
