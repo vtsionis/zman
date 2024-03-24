@@ -1,7 +1,5 @@
 # Zman
 
----
-
 `Zman` is yet another Zsh plugin manager.
 
 ## Origin story
@@ -27,7 +25,7 @@ fi
 source $ZMAN_DIR/zman.zsh
 ```
 
-Since I try to follow the [XDG specification]([XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)), my preferred `ZMAN_DIR` would be:
+Since I try to follow the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html), my preferred `ZMAN_DIR` would be:
 
 ```shell
 export ZMAN_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zman/zman.zsh"
@@ -98,7 +96,7 @@ TODO
 
 TODO
 
----
+
 
 
 
