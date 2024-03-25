@@ -94,7 +94,7 @@ zmam load zsh-users/zsh-completions
 
 #### `zman list`
 
-Get a list of all installed and loaded plugins. Intalled plugins that are not loaded will be grayed out in the list. Example:
+Get a list of all installed and loaded plugins. Installed plugins that are not loaded will be grayed out in the list. Example:
 
 ![zman-list](https://github.com/vtsionis/zman/assets/101921146/3b66403a-6b18-490b-947d-0086634db040)
 
@@ -105,3 +105,15 @@ TODO
 #### `zman purge`
 
 TODO
+
+---
+
+### Other Zsh plugin managers
+
+Let's face it. There are far better and more complex implementations of Zsh plugin managers to choose from than this one. The author highly recommends picking one from the below list, as they were the inspiration and priceless knowledge resource for this project.
+
+- [antidote](https://github.com/mattmc3/antidote)
+
+- [Znap](https://github.com/marlonrichert/zsh-snap)
+
+- [zcomet](https://github.com/agkozak/zcomet)
