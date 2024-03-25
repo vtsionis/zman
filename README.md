@@ -55,34 +55,42 @@ source $ZMAN_DIR/zman.zsh
 
 ## Usage
 
-After `zman.zsh` is sourced, then you will gain access to the `zman` command and its subcommands.
+After `zman.zsh` is sourced, then you will gain access to the `zman` command and its sub-commands.
 
 #### `zman help`
 
 This will print the help menu of `Zman`.
 
-- Example:
-  
-  ```shell
-  % zman help
-  Usage:
-    zman [subcommand] [plugin]
-  
-  Subcommands:
-    help        Print this menu
-    load        Optionally install and load the provided plugin
-    list        List all installed plugins
-    update      When no plugin is provided, update Zman itself, else
-                update the corresponding plugin. The special plugin name "all"
-                will trigger the update of all installed plugins
-    purge       When no plugin is provided, Zman will uninstall all of
-                the installed plugins that are not loaded, else it will
-                only uninstall the provided plugin
-  ```
+```shell
+% zman help
+Usage:
+  zman [subcommand] [plugin]
+
+Subcommands:
+  help        Print this menu
+  load        Optionally install and load the provided plugin
+  list        List all installed plugins
+  update      When no plugin is provided, update Zman itself, else
+              update the corresponding plugin. The special plugin name "all"
+              will trigger the update of all installed plugins
+  purge       When no plugin is provided, Zman will uninstall all of
+              the installed plugins that are not loaded, else it will
+              only uninstall the provided plugin
+```
 
 #### `zman load`
 
-TODO
+After `zman.zsh` is sourced, load your preferred Zsh plugins by specifying them in your `.zshrc` file. Example:
+
+```shell
+# .zshrc
+...
+zman load zsh-users/zsh-autosuggestions
+zmam load zsh-users/zsh-completions
+...
+```
+
+`load` is responsible for two things. First, in case the plugin is not already present, it will install it. Second, it will load the plugin making it available in your shell session. Do note that currently, only partial Git urls in the form of `<author>/<plugin>` are supported.
 
 #### `zman list`
 
@@ -95,9 +103,3 @@ TODO
 #### `zman purge`
 
 TODO
-
-
-
-
-
-
