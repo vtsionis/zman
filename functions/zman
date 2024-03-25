@@ -19,7 +19,7 @@ case $1 in
         fi
         ;;
     *)
-        _zman_print "Unknown subcommand \"$1\""
+        _zman_print "%F{#FF5555}%f Unknown sub-command \"$1\""
         ;;
 esac
 
