@@ -23,9 +23,8 @@ fi
 if (( ${zsh_loaded_plugins[(Ie)$1]} == 0 )); then
     # Only load the plugin if it wasn't loaded already
     (( $_is_installed == 0 )) && source $source_dir/$name.plugin.zsh
+    zsh_loaded_plugins+="$1"
 else
     _zman_print "Plugin $1 is already loaded"
 fi
-
-zsh_loaded_plugins+="$1"
 
