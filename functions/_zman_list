@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+if [[ -z $ZMAN_PLUGINS ]]; then
+    _zman_print "%F{#ff5555}%f Failed to identify the location of installed plugins."
+    _zman_print "%F{#bd93f9}󰋗%f ZMAN_PLUGINS is empty!"
+    return 1
+fi
+
+for source_plugin in $ZMAN_PLUGINS/*; do
+    # Remember that plugins are installed with the "/" being replaced by "SLASH"
+    # in their repository's name
+    local plugin=${${source_plugin:t}//SLASH/\/}
+
+    local sign="%F{#6272a4}◯"
+    if (( ${zsh_loaded_plugins[(Ie)$plugin]} )); then
+        sign="%F{#50fa7b}●%f"
+    fi
+
+    _zman_print "$sign $plugin"
+done
+
