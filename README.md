@@ -59,7 +59,7 @@ After `zman.zsh` is sourced, then you will gain access to the `zman` command and
 
 #### `zman help`
 
-This will print the help menu of `Zman`.
+Print the help menu of `Zman`.
 
 ```shell
 % zman help
@@ -94,7 +94,9 @@ zmam load zsh-users/zsh-completions
 
 #### `zman list`
 
-TODO
+Get a list of all installed and loaded plugins. Intalled plugins that are not loaded will be grayed out in the list. Example:
+
+![zman-list](https://github.com/vtsionis/zman/assets/101921146/3b66403a-6b18-490b-947d-0086634db040)
 
 #### `zman update`
 
