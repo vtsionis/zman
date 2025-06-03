@@ -10,7 +10,7 @@ local source_dir=$ZMAN_PLUGINS/${1//\//SLASH}
 local _is_installed=0
 if [[ ! -d $source_dir ]]; then
     _zman_print "%F{#BD93F9}%f Installing plugin \"$1\"..."
-    git clone https://github.com/$1 $source_dir --quiet
+    git clone --depth=1 https://github.com/$1 $source_dir --quiet
 
     _is_installed=$?
     if (( $_is_installed == 0 )); then
