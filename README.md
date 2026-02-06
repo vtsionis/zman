@@ -28,17 +28,21 @@ source $ZMAN_DIR/zman.zsh
 Since I try to follow the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html), my preferred `ZMAN_DIR` would be:
 
 ```shell
-export ZMAN_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zman/zman.zsh"
+export ZMAN_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zman"
 ```
 
 For the installation of plugins, `Zman` will use one of the below paths:
 
+- If `$ZMAN_DIR` is defined:
+
+  - `$ZMAN_DIR/plugins`
+
 - If `$XDG_DATA_HOME` is defined:
-  
+
   - `$XDG_DATA_HOME/zman/plugins`
 
 - else:
-  
+
   - `$HOME/.local/share/zman/plugins`
 
 You can override this behavior by setting the `ZMAN_PLUGINS` environment variable in your `.zshrc`file, before sourcing `zman.zsh`:
@@ -117,3 +121,4 @@ Let's face it. There are far better and more complex implementations of Zsh plug
 - [Znap](https://github.com/marlonrichert/zsh-snap)
 
 - [zcomet](https://github.com/agkozak/zcomet)
+
