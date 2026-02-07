@@ -71,6 +71,7 @@ function _zman_plugin_load () {
         return
     fi
 
+    setopt extendedglob
     if [[ $1 != ([^/]##)/([^/]##) ]]; then
         _zman_notify "Invalid plugin name. Expected <author>/<name>, but got \"$1\"" error
         return
