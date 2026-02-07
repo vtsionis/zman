@@ -3,7 +3,8 @@
 0=${(%):-%x}
 
 fpath=(${0:A:h}/completions $fpath)
-ZMAN_PLUGINS_DIR=${0:A:h}/plugins
+ZMAN_DIR=${0:A:h}
+ZMAN_PLUGINS_DIR=$ZMAN_DIR/plugins
 
 export -a ZMAN_LOADED_PLUGINS=()
 
@@ -54,7 +55,7 @@ function _zman_help () {
 
 function _zman_update () {
     local _updated=0
-    git -C ${0:A:h} pull --quiet 2>/dev/null
+    git -C $ZMAN_DIR pull --quiet 2>/dev/null
     _updated=$?
 
     if (( $_updated == 0 )); then
