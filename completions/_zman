@@ -1,0 +1,35 @@
+#compdef zman
+
+local -a commands=(
+    "help:Display help menu"
+    "load:Load plugin"
+    "update:Update Zman, plugins or all"
+)
+
+local -a update_targets=(
+    "self:Update Zman"
+    "plugins:Update installed plugins"
+    "all:Update both Zman and installed plugins"
+)
+
+_arguments \
+    "1: :{_describe -V 'command' commands}" \
+    '*:: :->cmds'
+
+case $state in
+    cmds)
+        case $words[1] in
+            (help)
+                ;;
+
+            (load)
+                ;;
+
+            (update)
+                _arguments \
+                    "1: :{_describe -V 'target' update_targets}"
+                ;;
+        esac
+        ;;
+esac
+
