@@ -66,6 +66,16 @@ function _zman_update () {
 }
 
 function _zman_plugin_load () {
+    if [[ -z $1 ]]; then
+        _zman_notify "A plugin name is required" error
+        return
+    fi
+
+    if [[ $1 != ([^/]##)/([^/]##) ]]; then
+        _zman_notify "Invalid plugin name. Expected <author>/<name>, but got \"$1\"" error
+        return
+    fi
+
     local _is_installed=0
 
     local plugin_dir=$ZMAN_PLUGINS_DIR/${1//\//_SLASH_}
