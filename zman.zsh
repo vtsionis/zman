@@ -6,25 +6,22 @@ fpath=(${0:A:h}/completions $fpath)
 ZMAN_DIR=${0:A:h}
 ZMAN_PLUGINS_DIR=$ZMAN_DIR/plugins
 
-export -a ZMAN_LOADED_PLUGINS=()
+ZMAN_LOADED_PLUGINS=()
 
 function _zman_notify () {
-    local logo=ZMAN
     local message=$1
     local level=${2:-info}
     local delay=${3:-0}
 
-    if [[ ! -v $ZMAN_NO_COLOR ]]; then
-        logo="%K{black}%F{blue}$logo%f"
+    local logo="%K{black}%F{blue}ZMAN%f"
 
-        case $level in
-            error) level="%F{red}$level%f" ;;
-            warning) level="%F{yellow}$level%f" ;;
-            success) level="%F{green}$level%f" ;;
-            note) level="%F{magenta}$level%f" ;;
-            info | *) level="%F{cyan}$level%f" ;;
-        esac
-    fi
+    case $level in
+        error) level="%F{red}$level%f" ;;
+        warning) level="%F{yellow}$level%f" ;;
+        success) level="%F{green}$level%f" ;;
+        note) level="%F{magenta}$level%f" ;;
+        info | *) level="%F{cyan}$level%f" ;;
+    esac
 
     print -P "$logo $level $1%k" && sleep $delay
 }
@@ -41,6 +38,7 @@ function _zman_help () {
         "\t\t\tThe plugin will be automatically installed if not present."
         "\t\t\tExample:"
         "\t\t\t%F{magenta}zman load zsh-users/zsh-completions%f"
+        "\nls\t\t\tList all installed plugins and their status."
         "\nupdate\t<target>\tStart the update process."
         "\n\t\t\tTo update Zman itself:"
         "\t\t\t%F{magenta}zman update self%f"
@@ -103,8 +101,33 @@ function _zman_plugin_load () {
     fi
 }
 
+function _zman_plugin_ls () {
+    setopt LOCAL_OPTIONS NULL_GLOB # Ignore errors due to an empty Plugins directory
+
+    _zman_notify "List of installed plugins\n" info 0
+
+    local output=("%U%F{cyan}Plugin%f%u" "%U%F{cyan}Loaded%f%u")
+
+    for plugin in $ZMAN_PLUGINS_DIR/*; do
+        local name=${${plugin:t}//_SLASH_/\/}
+
+        output+=($name)
+        if (( ${ZMAN_LOADED_PLUGINS[(Ie)$name]} != 0 )); then
+            output+=("%F{green}  %f")
+        else
+            output+=("%F{red}  ✗%f")
+        fi
+    done
+
+    if (( ${#output} == 2 )); then
+        _zman_notify "No plugin is installed." note 0
+    else
+        print -a -C 2 -P $output
+    fi
+}
+
 function _zman_plugin_update () {
-    setopt NULL_GLOB # Ignore errors due to an empty Plugins directory
+    setopt LOCAL_OPTIONS NULL_GLOB # Ignore errors due to an empty Plugins directory
 
     for plugin in $ZMAN_PLUGINS_DIR/*; do
         local name=${${plugin:t}//_SLASH_/\/}
@@ -126,6 +149,8 @@ function zman () {
 
     case $1 in
         help) _zman_help ;;
+
+        ls) _zman_plugin_ls ;;
 
         load) _zman_plugin_load ${@:2} ;;
 

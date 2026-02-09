@@ -3,6 +3,7 @@
 local -a commands=(
     "help:Display help menu"
     "load:Load plugin"
+    "ls:List installed plugins"
     "update:Update Zman, plugins or all"
 )
 
@@ -19,12 +20,6 @@ _arguments \
 case $state in
     cmds)
         case $words[1] in
-            (help)
-                ;;
-
-            (load)
-                ;;
-
             (update)
                 _arguments \
                     "1: :{_describe -V 'target' update_targets}"

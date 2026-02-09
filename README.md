@@ -8,6 +8,12 @@ Why another Zsh plugin manager when there are plenty of excellent options to cho
 
 *Note:* This is still more of a personal quest rather than a production-ready Zsh plugin manager. Don't shout too much at me if you find it inefficient or notice that I'm approaching things in a wrong way. **You've been warned!**
 
+## Prerequisites
+
+- [Zsh](https://www.zsh.org/) (duh!)
+
+- [git](https://git-scm.com/)
+
 ## Installation
 
 Add below lines to your `.zshrc` file, or any other configuration file that is sourced during Zsh initialization:
@@ -48,6 +54,10 @@ zman load zsh-users/zsh-autosuggestions
 zman load zsh-users/zsh-completions
 ...
 ```
+
+#### `zman ls`
+
+Display all of the installed plugins in a nice table view. The second column indicates whether the plugin is loaded or not for the current shell session.
 
 #### `zman update <target>`
 
