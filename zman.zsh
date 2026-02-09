@@ -57,6 +57,7 @@ function _zman_update () {
     _updated=$?
 
     if (( $_updated == 0 )); then
+        . $ZMAN_DIR/zman.zsh
         _zman_notify "Finished updating ZMAN" success
     else
         _zman_notify "Failed to update ZMAN" error
