@@ -45,7 +45,7 @@ If the plugin is missing, it will be automatically installed by Zman. The `<plug
 # .zshrc
 ...
 zman load zsh-users/zsh-autosuggestions
-zmam load zsh-users/zsh-completions
+zman load zsh-users/zsh-completions
 ...
 ```
 
