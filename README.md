@@ -16,7 +16,7 @@ Why another Zsh plugin manager when there are plenty of excellent options to cho
 
 ## Installation
 
-Add below lines to your `.zshrc` file, or any other configuration file that is sourced during Zsh initialization:
+Add below lines to your `.zshrc` file, or any other configuration file that is sourced during Zsh initialization to install the latest stable version of `Zman`:
 
 ```shell
 # .zshrc
@@ -26,11 +26,13 @@ Add below lines to your `.zshrc` file, or any other configuration file that is s
 ZMAN_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zman"
 
 if [[ ! -f $ZMAN_DIR/zman.zsh ]]; then
-  git clone https://github.com/vtsionis/zman.git $ZMAN_DIR
+  git clone --branch=stable https://github.com/vtsionis/zman.git $ZMAN_DIR
 fi
 
 source $ZMAN_DIR/zman.zsh
 ```
+
+To install the latest development version, use the `master` branch.
 
 All plugins will be installed under `$ZMAN_DIR/plugins`.
 
