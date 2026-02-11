@@ -67,15 +67,15 @@ This will start the updating process depending on the specified `<target>`.
 
 - To update `Zman` itself:
 
-`zman update self`
+  `zman update self`
 
 - To update all installed plugins:
 
-`zman update plugins`
+  `zman update plugins`
 
 - Finally, to update both `Zman` and all plugins:
 
-`zman update all`
+  `zman update all`
 
 ---
 
