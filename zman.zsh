@@ -52,12 +52,13 @@ function _zman_help () {
 }
 
 function _zman_update () {
-    local _updated=0
     git -C $ZMAN_DIR pull --quiet 2>/dev/null
-    _updated=$?
+    local _updated=$?
 
     if (( $_updated == 0 )); then
+        local currently_loaded_plugins=$ZMAN_LOADED_PLUGINS
         . $ZMAN_DIR/zman.zsh
+        ZMAN_LOADED_PLUGINS=$currently_loaded_plugins
         _zman_notify "Finished updating ZMAN" success
     else
         _zman_notify "Failed to update ZMAN" error
