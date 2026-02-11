@@ -127,15 +127,38 @@ function _zman_plugin_ls () {
     fi
 }
 
+function _zman_plugin_purge () {
+    setopt LOCAL_OPTIONS NULL_GLOB # Ignore errors due to an empty Plugins directory
+
+    local output=("\n%U%F{cyan}Purged Plugins%f%u")
+
+    for plugin in $ZMAN_PLUGINS_DIR/*; do
+        local name=${${plugin:t}//_SLASH_/\/}
+
+        if (( ${ZMAN_LOADED_PLUGINS[(Ie)$name]} == 0 )); then
+            rm -rf $plugin
+            local _removed=$?
+            if (( $_removed == 0 )); then
+                output+=($name)
+            fi
+        fi
+    done
+
+    if (( ${#output} == 1 )); then
+        _zman_notify "No plugin was purged." note 0
+    else
+        print -a -C 1 -P $output
+    fi
+}
+
 function _zman_plugin_update () {
     setopt LOCAL_OPTIONS NULL_GLOB # Ignore errors due to an empty Plugins directory
 
     for plugin in $ZMAN_PLUGINS_DIR/*; do
         local name=${${plugin:t}//_SLASH_/\/}
 
-        local _updated=0
         git -C $plugin pull --quiet 2>/dev/null
-        _updated=$?
+        local _updated=$?
 
         if (( $_updated == 0 )); then
             _zman_notify "Finished updating plugin \"$name\"" success
@@ -154,6 +177,8 @@ function zman () {
         ls) _zman_plugin_ls ;;
 
         load) _zman_plugin_load ${@:2} ;;
+
+        purge) _zman_plugin_purge ;;
 
         update)
             case $2 in

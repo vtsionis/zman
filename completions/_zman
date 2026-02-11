@@ -4,6 +4,7 @@ local -a commands=(
     "help:Display help menu"
     "load:Load plugin"
     "ls:List installed plugins"
+    "purge:Remove plugins that are not loaded"
     "update:Update Zman, plugins or all"
 )
 
