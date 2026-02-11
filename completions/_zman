@@ -8,6 +8,10 @@ local -a commands=(
     "update:Update Zman, plugins or all"
 )
 
+local -a purge_targets=(
+    "all:Remove all installed plugins"
+)
+
 local -a update_targets=(
     "self:Update Zman"
     "plugins:Update installed plugins"
@@ -21,6 +25,11 @@ _arguments \
 case $state in
     cmds)
         case $words[1] in
+            (purge)
+                _arguments \
+                    "1: :{_describe -V 'target' purge_targets}"
+                ;;
+
             (update)
                 _arguments \
                     "1: :{_describe -V 'target' update_targets}"

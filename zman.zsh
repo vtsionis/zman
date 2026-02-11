@@ -39,6 +39,10 @@ function _zman_help () {
         "\t\t\tExample:"
         "\t\t\t%F{magenta}zman load zsh-users/zsh-completions%f"
         "\nls\t\t\tList all installed plugins and their status."
+        "\npurge\t[all]\t\tRemove installed but not loaded plugins."
+        "\t\t\tWhen %F{yellow}all%f is specified, all installed plugins are removed"
+        "\t\t\tregardless if they are loaded or not. This is an easy way to clean up"
+        "\t\t\tthe plugins directory and start fresh."
         "\nupdate\t<target>\tStart the update process."
         "\n\t\t\tTo update Zman itself:"
         "\t\t\t%F{magenta}zman update self%f"
@@ -136,7 +140,7 @@ function _zman_plugin_purge () {
     for plugin in $ZMAN_PLUGINS_DIR/*; do
         local name=${${plugin:t}//_SLASH_/\/}
 
-        if (( ${ZMAN_LOADED_PLUGINS[(Ie)$name]} == 0 )); then
+        if [[ $1 == all ]] || (( ${ZMAN_LOADED_PLUGINS[(Ie)$name]} == 0 )); then
             rm -rf $plugin
             local _removed=$?
             if (( $_removed == 0 )); then
@@ -175,11 +179,13 @@ function zman () {
     case $1 in
         help) _zman_help ;;
 
+        integrate) _zman_integrate ;;
+
         ls) _zman_plugin_ls ;;
 
         load) _zman_plugin_load ${@:2} ;;
 
-        purge) _zman_plugin_purge ;;
+        purge) _zman_plugin_purge $2;;
 
         update)
             case $2 in
