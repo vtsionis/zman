@@ -61,20 +61,24 @@ zman load zsh-users/zsh-completions
 
 Display all of the installed plugins in a nice table view. The second column indicates whether the plugin is loaded or not for the current shell session.
 
+#### `zman purge [all]`
+
+Remove all installed plugins that are not loaded in the current Zsh session. When `all` is specified, then all installed plugins are removed regardless if they are loaded or not. This is an easy way to clean up the plugins directory and start fresh.
+
 #### `zman update <target>`
 
 This will start the updating process depending on the specified `<target>`.
 
 - To update `Zman` itself:
-
+  
   `zman update self`
 
 - To update all installed plugins:
-
+  
   `zman update plugins`
 
 - Finally, to update both `Zman` and all plugins:
-
+  
   `zman update all`
 
 ---
