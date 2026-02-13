@@ -13,7 +13,7 @@ function _zman_notify () {
     local level=${2:-info}
     local delay=${3:-0}
 
-    local logo="%K{black}%F{blue}ZMAN%f"
+    local logo="%F{blue}ZMAN%f"
 
     case $level in
         error) level="%F{red}$level%f" ;;
@@ -23,7 +23,7 @@ function _zman_notify () {
         info | *) level="%F{cyan}$level%f" ;;
     esac
 
-    print -P "$logo $level $1%k" && sleep $delay
+    print -P "$logo $level $1" && sleep $delay
 }
 
 function _zman_help () {
