@@ -72,6 +72,8 @@ This will start the updating process depending on the specified `<target>`.
 - To update `Zman` itself:
   
   `zman update self`
+  
+  Note that `zman.sh` will be sourced again automatically after this update so there is no need for a manual sourcing.
 
 - To update all installed plugins:
   
