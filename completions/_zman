@@ -23,7 +23,7 @@ local -a purge_options=(
 local -a update_targets=(
     "self:     Update Zman"
     "plugins:     Update all installed plugins"
-    "all:     Update both Zman and installed plugins"
+    "everything:     Update both Zman and installed plugins"
 )
 
 _arguments \

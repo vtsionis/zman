@@ -132,7 +132,7 @@ at once depending on which %F{magenta}<target>%f is specified.
 - %F{magenta}plugins%f
   Update all Git and Oh-My-Zsh installed plugins.
 
-- %F{magenta}all%f
+- %F{magenta}everything%f
   Update both Zman itself and the installed plugins in one go."
         [version]="
 Print information about the currently running version of Zman.
@@ -168,7 +168,7 @@ zman update self
 zman update ohmyzsh/git
 zman update zsh-users/zsh-autosuggestions
 zman update plugins
-zman update all"
+zman update everything"
     )
 
     local output="
@@ -633,7 +633,7 @@ function zman () {
             case $2 in
                 self) _zman_self_update ;;
                 plugins) _zman_plugins_update ;;
-                all)
+                everything)
                     _zman_self_update
                     _zman_plugins_update
                     ;;
