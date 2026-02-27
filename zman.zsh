@@ -294,7 +294,7 @@ function _zman_self_update () {
 
     _zman_util_notify "\nUpdating Zman" info 1
 
-    git -C $ZMAN_DIR pull origin $(git branch --show-current) --quiet 2>/dev/null
+    git -C $ZMAN_DIR pull origin $(git -C $ZMAN_DIR branch --show-current) --quiet 2>/dev/null
     local _updated=$?
     if (( $_updated )); then
         _zman_util_notify "Failed to update ZMAN" error
@@ -448,7 +448,7 @@ function _zman_util_plugin_update_git () {
 
     _zman_util_notify "\nUpdating $kind \"$1\"" info 1
 
-    git -C $directory pull origin $(git branch --show-current) --quiet 2>/dev/null
+    git -C $directory pull origin $(git -C $directory branch --show-current) --quiet 2>/dev/null
     local _updated=$?
     if (( $_updated )); then
         _zman_util_notify "Failed to update $kind \"$1\"" error
