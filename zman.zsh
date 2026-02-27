@@ -200,7 +200,7 @@ function _zman_version () {
 
     local branch=$(git -C $ZMAN_DIR branch --show-current --quiet 2>/dev/null)
     local commit=$(git -C $ZMAN_DIR log -n 1 $branch --format="%H" 2>/dev/null)
-    local commits_behind=$(git rev-list --count HEAD..origin/$branch 2>/dev/null)
+    local commits_behind=$(git -C $ZMAN_DIR rev-list --count HEAD..origin/$branch 2>/dev/null)
 
     local output=(
         "%F{cyan}Branch:%f" $branch
@@ -437,6 +437,7 @@ function _zman_plugin_load () {
 
 function _zman_util_plugin_update_git () {
     emulate -L zsh
+    setopt EXTENDED_GLOB
 
     local plugin=$1
     local directory=$2
@@ -444,18 +445,27 @@ function _zman_util_plugin_update_git () {
     local kind="plugin"
     if [[ $plugin =~ ^ohmyzsh/* ]]; then
         kind="Oh-My-Zsh plugin"
+        plugin=${plugin/ohmyzsh\//}
     fi
 
-    _zman_util_notify "\nUpdating $kind \"$1\"" info 1
+    local branch=$(git -C $directory branch --show-current --quiet 2>/dev/null)
+    local commits_behind=$(git -C $directory rev-list --count HEAD..origin/$branch 2>/dev/null)
+
+    if (( ! $commits_behind )); then
+        _zman_util_notify "\nNo available updates for $kind \"$plugin\""
+        return 0
+    fi
+
+    _zman_util_notify "\nUpdating $kind \"$plugin\""
 
     git -C $directory pull origin $(git -C $directory branch --show-current) --quiet 2>/dev/null
     local _updated=$?
     if (( $_updated )); then
-        _zman_util_notify "Failed to update $kind \"$1\"" error
+        _zman_util_notify "Failed to update $kind \"$plugin\"" error
         return $_updated
     fi
 
-    _zman_util_notify "Finished updating $kind \"$1\"" success
+    _zman_util_notify "Finished updating $kind \"$plugin\"" success
 }
 
 function _zman_plugin_update () {
@@ -480,7 +490,7 @@ function _zman_plugin_update () {
         return 1
     fi
 
-    _zman_util_plugin_update_git ${plugin/ohmyzsh\//} $directory $kind
+    _zman_util_plugin_update_git $plugin $directory
     return $?
 }
 
@@ -493,7 +503,7 @@ function _zman_plugins_update () {
         _no_plugins=1
 
         local plugin=${${directory:t}//_SLASH_/\/}
-        _zman_util_plugin_update_git ${plugin/ohmyzsh\//} $directory
+        _zman_util_plugin_update_git $plugin $directory
     done
 
     if (( ! $_no_plugins )); then
