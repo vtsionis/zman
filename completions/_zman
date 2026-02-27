@@ -1,21 +1,29 @@
 #compdef zman
 
 local -a commands=(
-    "help:Display help menu"
-    "load:Load plugin"
-    "ls:List installed plugins"
-    "purge:Remove plugins that are not loaded"
-    "update:Update Zman, plugins or all"
+    "install:     install a plugin"
+    "load:     load a plugin"
+    "ls:     list all plugins"
+    "purge:     remove plugins"
+    "remove:     remove a plugin"
+    "update:     start update process"
+    "version:     print current Zman version"
 )
 
-local -a purge_targets=(
-    "all:Remove all installed plugins"
+local -a install_options=(
+    "-f:     reinstall plugin if already installed"
+    "--force:     reinstall plugin if already installed"
+)
+
+local -a purge_options=(
+    "-a:     remove all installed plugins"
+    "--all:     remove all installed plugins"
 )
 
 local -a update_targets=(
-    "self:Update Zman"
-    "plugins:Update installed plugins"
-    "all:Update both Zman and installed plugins"
+    "self:     Update Zman"
+    "plugins:     Update all installed plugins"
+    "all:     Update both Zman and installed plugins"
 )
 
 _arguments \
@@ -25,9 +33,26 @@ _arguments \
 case $state in
     cmds)
         case $words[1] in
+            (install)
+                _arguments \
+                    "*:: :{_describe -V 'option' install_options}"
+                ;;
+
             (purge)
                 _arguments \
-                    "1: :{_describe -V 'target' purge_targets}"
+                    "1: :{_describe -V 'option' purge_options}"
+                ;;
+
+            (remove)
+                if [[ -d $ZMAN_PLUGINS_DIR ]]; then
+                    local plugins=()
+                    for directory in $ZMAN_PLUGINS_DIR/*(/); do
+                        plugins+=(${${directory:t}//_SLASH_/\/})
+                    done
+
+                    _arguments \
+                        "1: :{_describe -V 'plugin' plugins}"
+                fi
                 ;;
 
             (update)

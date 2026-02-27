@@ -34,54 +34,33 @@ source $ZMAN_DIR/zman.zsh
 
 To install the latest development version, use the `master` branch.
 
-All plugins will be installed under `$ZMAN_DIR/plugins`.
+## Environment variables
+
+###### `ZMAN_PLUGINS_DIR`
+
+Points to the location of where the plugins will be installed. Defaults to `/ZMAN_DIR/plugins`. If you want to configure a custom one, make sure to set it **BEFORE** you source `/ZMAN_DIR/zman.zsh`.
 
 ## Usage
 
 After `zman.zsh` is sourced, you will be able to use the `zman` command and its sub-commands.
 
-#### `zman help`
+For detailed information on the `zman` command as well as all available commands, run `zman help` and `zman help <command>`.
 
-Print the help menu of `Zman`.
+Currently supported commands:
 
-#### `zman load <plugin>`
+- `help`
 
-Load your preferred Zsh plugins by specifying them in your `.zshrc` file, one by one.
-If the plugin is missing, it will be automatically installed by Zman. The `<plugin>` should be specified as a partial URL in the form of `<author>/<plugin>`. Currently, only plugins that are hosted as a Github repository are supported. Example:
+- `install`
 
-```shell
-# .zshrc
-...
-zman load zsh-users/zsh-autosuggestions
-zman load zsh-users/zsh-completions
-...
-```
+- `ls`
 
-#### `zman ls`
+- `purge`
 
-Display all of the installed plugins in a nice table view. The second column indicates whether the plugin is loaded or not for the current shell session.
+- `remove`
 
-#### `zman purge [all]`
+- `update`
 
-Remove all installed plugins that are not loaded in the current Zsh session. When `all` is specified, then all installed plugins are removed regardless if they are loaded or not. This is an easy way to clean up the plugins directory and start fresh.
-
-#### `zman update <target>`
-
-This will start the updating process depending on the specified `<target>`.
-
-- To update `Zman` itself:
-  
-  `zman update self`
-  
-  Note that `zman.sh` will be sourced again automatically after this update so there is no need for a manual sourcing.
-
-- To update all installed plugins:
-  
-  `zman update plugins`
-
-- Finally, to update both `Zman` and all plugins:
-  
-  `zman update all`
+- `version`
 
 ---
 
