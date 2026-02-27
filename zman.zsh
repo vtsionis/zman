@@ -198,7 +198,7 @@ $examples[$cmd]"
 function _zman_version () {
     emulate -L zsh
 
-    local branch=$(git branch --show-current --quiet 2>/dev/null)
+    local branch=$(git -C $ZMAN_DIR branch --show-current --quiet 2>/dev/null)
     local commit=$(git -C $ZMAN_DIR log -n 1 $branch --format="%H" 2>/dev/null)
     local commits_behind=$(git rev-list --count HEAD..origin/$branch 2>/dev/null)
 
