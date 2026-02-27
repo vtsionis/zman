@@ -292,6 +292,14 @@ function _zman_util_plugin_install_omz () {
 function _zman_self_update () {
     emulate -L zsh
 
+    local branch=$(git -C $ZMAN_DIR branch --show-current --quiet 2>/dev/null)
+    local commits_behind=$(git -C $ZMAN_DIR rev-list --count HEAD..origin/$branch 2>/dev/null)
+
+    if (( ! $commits_behind )); then
+        _zman_util_notify "\nZman running on the latest version"
+        return 0
+    fi
+
     _zman_util_notify "\nUpdating Zman" info 1
 
     git -C $ZMAN_DIR pull origin $(git -C $ZMAN_DIR branch --show-current) --quiet 2>/dev/null
