@@ -61,7 +61,7 @@ Currently supported commands:
 
 For detailed information on the `zman` command, as well as all available commands, run `zman help` and `zman help <command>`.
 
-Command completion is also implemented. For a more OTB experience, the `<ZMAN_DIR>/completions` is automatically added to your `fpath` so there is no need for any extra configuration to have a working completion system.
+Command completion is also available OTB. The `<ZMAN_DIR>/completions` is automatically added to your `fpath` eliminating the need for any extra configuration to have a working completion system.
 
 ## Supported plugins
 
