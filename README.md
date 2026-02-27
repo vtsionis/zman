@@ -8,6 +8,8 @@ Why another Zsh plugin manager when there are plenty of excellent options to cho
 
 *Note:* This is still more of a personal quest rather than a production-ready Zsh plugin manager. Don't shout too much at me if you find it inefficient or notice that I'm approaching things in a wrong way. **You've been warned!**
 
+<span style="color:orange">NOTE:</span> `<ZMAN_DIR>` will refer to the installation path of `Zman` and not to any defined/expected environment variable.
+
 ## Prerequisites
 
 - [Zsh](https://www.zsh.org/) (duh!)
@@ -38,29 +40,42 @@ To install the latest development version, use the `master` branch.
 
 ###### `ZMAN_PLUGINS_DIR`
 
-Points to the location of where the plugins will be installed. Defaults to `/ZMAN_DIR/plugins`. If you want to configure a custom one, make sure to set it **BEFORE** you source `/ZMAN_DIR/zman.zsh`.
+Points to the location of where the plugins will be installed. Defaults to `/<ZMAN_DIR>/plugins`. If you want to configure a custom one, make sure to set it **BEFORE** you source `/<ZMAN_DIR>/zman.zsh`.
 
 ## Usage
 
-After `zman.zsh` is sourced, you will be able to use the `zman` command and its sub-commands.
-
-For detailed information on the `zman` command as well as all available commands, run `zman help` and `zman help <command>`.
+After `/<ZMAN_DIR>/zman.zsh` is sourced, you will be able to use the `zman` command and its sub-commands.
 
 Currently supported commands:
 
-- `help`
+| command   | description                  |
+| --------- | ---------------------------- |
+| `help`    | display help menu            |
+| `install` | install a plugin             |
+| `load`    | load a plugin                |
+| `ls`      | list all plugins             |
+| `purge`   | remove plugins               |
+| `remove`  | remove a plugin              |
+| `update`  | start the update process     |
+| `version` | print current `Zman` version |
 
-- `install`
+For detailed information on the `zman` command, as well as all available commands, run `zman help` and `zman help <command>`.
 
-- `ls`
+## Supported plugins
 
-- `purge`
+Many of the above commands accept a `<plugin-name>` as their argument. Below are all the currently supported plugins and the expected format for their name.
 
-- `remove`
+- Git plugins:
+  
+  The `<plugin-name>` format should be `<author>/<repository-name>`.
 
-- `update`
+- Oh-My-Zsh plugins:
+  
+  The `<plugin-name>` format should be `ohmyzsh/<plugin-directory-name>`.
 
-- `version`
+- Local plugins:
+  
+  The `<plugin-name>` should be an <u>absolute</u> path of the plugin's directory, starting with either "/" or "~".
 
 ---
 
