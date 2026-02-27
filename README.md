@@ -40,11 +40,11 @@ To install the latest development version, use the `master` branch.
 
 ###### $ZMAN_PLUGINS_DIR
 
-Points to the location of where the plugins will be installed. Defaults to `/<ZMAN_DIR>/plugins`. If you want to configure a custom one, make sure to set it **BEFORE** you source `/<ZMAN_DIR>/zman.zsh`.
+Points to the location of where the plugins will be installed. Defaults to `<ZMAN_DIR>/plugins`. If you want to configure a custom one, make sure to set it **BEFORE** you source `<ZMAN_DIR>/zman.zsh`.
 
 ## Usage
 
-After `/<ZMAN_DIR>/zman.zsh` is sourced, you will be able to use the `zman` command and its sub-commands.
+After `<ZMAN_DIR>/zman.zsh` is sourced, you will be able to use the `zman` command and its sub-commands.
 
 Currently supported commands:
 
@@ -60,6 +60,8 @@ Currently supported commands:
 | `version` | print current `Zman` version |
 
 For detailed information on the `zman` command, as well as all available commands, run `zman help` and `zman help <command>`.
+
+Command completion is also implemented. For a more OTB experience, the `<ZMAN_DIR>/completions` is automatically added to your `fpath` so there is no need for any extra configuration to have a working completion system.
 
 ## Supported plugins
 
