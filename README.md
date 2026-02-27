@@ -6,9 +6,9 @@
 
 Why another Zsh plugin manager when there are plenty of excellent options to choose from? Well, why not! This started as (and still is) a personal project to figure out the internal mechanisms of Zsh and its ecosystem. After moving away from `oh-my-zsh` and trying out a plethora of Zsh plugin managers, it was about time to create my own. A couple of hours and beers later, `Zman` was created!
 
-*Note:* This is still more of a personal quest rather than a production-ready Zsh plugin manager. Don't shout too much at me if you find it inefficient or notice that I'm approaching things in a wrong way. **You've been warned!**
+*NOTE:* This is still more of a personal quest rather than a production-ready Zsh plugin manager. Don't shout too much at me if you find it inefficient or notice that I'm approaching things in a wrong way. **You've been warned!**
 
-<span style="color:orange">NOTE:</span> `<ZMAN_DIR>` will refer to the installation path of `Zman` and not to any defined/expected environment variable.
+*NOTE 2:* `<ZMAN_DIR>` will refer to the installation path of `Zman` and not to any defined/expected environment variable.
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ To install the latest development version, use the `master` branch.
 
 ## Environment variables
 
-###### `ZMAN_PLUGINS_DIR`
+###### $ZMAN_PLUGINS_DIR
 
 Points to the location of where the plugins will be installed. Defaults to `/<ZMAN_DIR>/plugins`. If you want to configure a custom one, make sure to set it **BEFORE** you source `/<ZMAN_DIR>/zman.zsh`.
 
